@@ -42,7 +42,7 @@ class MigrationPolicy
   end
 
   def cluster_owner?
-    @migration.cluster.owners.collect(&:username).include?(current_user_name)
+    @migration.cluster.owners.collect(&:username).map(&:downcase).include?(current_user_name.downcase)
   end
 
   def admin_review_required?

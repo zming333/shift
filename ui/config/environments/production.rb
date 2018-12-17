@@ -101,7 +101,7 @@ Rails.application.configure do
   config.x.mailer.default_to = ENV['MAILER_DEFAULT_TO'] || 'your_local_name'
   config.x.mailer.default_to_domain = ENV['MAILER_DEFAULT_TO_DOMAIN'] || '@your_domain'
 
-  config.x.admins = (ENV['SHIFT_ADMINS'] || "").split(",").map(&:upcase)
+  config.x.admins = (ENV['SHIFT_ADMINS'] || "").split(",").map(&:downcase)
 
   ## ptosc
   # root path for pt-osc output logs. specified within shift-runner
