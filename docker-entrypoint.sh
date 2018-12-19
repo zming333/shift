@@ -6,10 +6,17 @@ mkdir -p /opt/code/runner/config
 printf "[client]
 user     = ${RUNNER_MYSQL_USER}
 password = ${RUNNER_MYSQL_PASSWORD}
-ssl-cert = ${RUNNER_MYSQL_CERT}
+" > /opt/code/runner/config/my_production.cnf
+
+if [ -n "${RUNNER_MYSQL_CERT}" -a -n
+"${RUNNER_MYSQL_KEY}" -a -n
+"${RUNNER_MYSQL_ROOTCA}" ]; then
+
+printf "ssl-cert = ${RUNNER_MYSQL_CERT}
 ssl-key  = ${RUNNER_MYSQL_KEY}
 ssl-ca   = ${RUNNER_MYSQL_ROOTCA}
-" > /opt/code/runner/config/my_production.cnf
+" >> /opt/code/runner/config/my_production.cnf
+fi
 
 printf "# config for the database client
 mysql_user: ${RUNNER_MYSQL_USER}
