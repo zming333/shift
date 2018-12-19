@@ -42,6 +42,9 @@ COPY ui /opt/code/ui
 # copy runner executable
 COPY --from=builder /go/src/github.com/square/shift/runner/runner /opt/code/runner/
 
+# create shift log dir
+RUN mkdir -p /tmp/shift
+
 # copy entrypoint script
 COPY docker-entrypoint.sh /opt/code/
 
