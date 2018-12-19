@@ -33,14 +33,14 @@ RUN cpanm YAML::Syck \
     && dpkg -i pt-toolkit-2.2.15.deb && rm pt-toolkit-2.2.15.deb \
     && patch /usr/bin/pt-online-schema-change /opt/code/ptosc-patch/0001-ptosc-square-changes.patch
 
-# copy runner executable
-COPY --from=builder /go/src/github.com/square/shift/runner/runner /opt/code/runner/
-
 # copy / install ui
 COPY ui/Gemfile ui/Gemfile.lock /opt/code/ui/
 RUN cd /opt/code/ui \
     && bundle install
 COPY ui /opt/code/ui
+
+# copy runner executable
+COPY --from=builder /go/src/github.com/square/shift/runner/runner /opt/code/runner/
 
 # copy entrypoint script
 COPY docker-entrypoint.sh /opt/code/
