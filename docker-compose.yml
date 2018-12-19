@@ -11,7 +11,8 @@ services:
       - MYSQL_USER=shift
       - MYSQL_PASSWORD=shift
   shift:
-    image: xiachufang/shift:latest
+    build:
+      context: .
     ports:
       - "3000:3000"
     environment:
