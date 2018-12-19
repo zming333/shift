@@ -18,6 +18,7 @@ services:
     environment:
       - DATABASE_URL=mysql2://shift:shift@db/shift?pool=30&timeout=5000
       - SECRET_KEY_BASE=some_random_30_char_string
+      - DB_BLACKLIST=information_schema,mysql,performance_schema,_pending_drops,common_schema,sys
       - UI_ADMINS=cadl
       - UI_MYSQL_USER=shift
       - UI_MYSQL_PASSWORD=shift
