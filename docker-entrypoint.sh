@@ -27,7 +27,7 @@ stop_file_path: /tmp/shift-stop/stop_shift_runner
 host_override: ${RUNNER_HOST_OVERRIDE}
 port_override: ${RUNNER_PORT_OVERRIDE}
 database_override: ${RUNNER_DATABASE_OVERRIDE}
-" > /opt/code/runner/config/production-config.yml
+" > /opt/code/runner/config/production-config.yaml
 
 # TODO:
 # patch ui/config/environments/production.rb at runtime in this script
@@ -37,15 +37,15 @@ database_override: ${RUNNER_DATABASE_OVERRIDE}
 mkdir -p /etc/supervisor/conf.d
 printf '[program:shift-ui]
 command=bundle exec rails server -b 0.0.0.0 -p 3000
-directory=/opt/code
+directory=/opt/code/ui/
 autostart=true
 stdout_logfile=/dev/stdout
 stdout_logfile_maxbytes=0
 redirect_stderr=true
 
 [program:shift-runner]
-command=./runner
-directory=/opt/code
+command=/opt/code/runner/runner
+directory=/opt/code/runner/
 autostart=true
 stdout_logfile=/dev/stdout
 stdout_logfile_maxbytes=0

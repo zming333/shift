@@ -36,16 +36,19 @@ RUN cpanm YAML::Syck \
 # copy runner executable
 COPY --from=builder /go/src/github.com/square/shift/runner/runner /opt/code/runner/
 
+# copy / install ui
 COPY ui/Gemfile ui/Gemfile.lock /opt/code/ui/
 RUN cd /opt/code/ui \
     && bundle install
 COPY ui /opt/code/ui
 
+# copy entrypoint script
+COPY docker-entrypoint.sh /opt/code/
+
+# runtime
 WORKDIR /opt/code
-
 EXPOSE 3000
-
-ENTRYPOINT docker-entrypoint.sh
+ENTRYPOINT /opt/code/docker-entrypoint.sh
 
 # TODO:
 # patch ui/app/controllers/application_controller.rb to support cert-based account system
