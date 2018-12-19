@@ -2,6 +2,15 @@
 
 # render runner config
 mkdir -p /opt/code/runner/config
+
+printf "[client]
+user     = ${RUNNER_MYSQL_USER}
+password = ${RUNNER_MYSQL_PASSWORD}
+ssl-cert = ${RUNNER_MYSQL_CERT}
+ssl-key  = ${RUNNER_MYSQL_KEY}
+ssl-ca   = ${RUNNER_MYSQL_ROOTCA}
+" > /opt/code/runner/config/my_production.cnf
+
 printf "# config for the database client
 mysql_user: ${RUNNER_MYSQL_USER}
 mysql_password: ${RUNNER_MYSQL_PASSWORD}
