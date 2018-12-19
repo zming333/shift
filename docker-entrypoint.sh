@@ -66,4 +66,10 @@ export PATH="/usr/local/bin:/usr/local/bundle/bin:$PATH"
 export RAILS_ENV="production"
 export RAILS_SERVE_STATIC_FILES=1
 
+# init db
+cd /opt/code/ui
+bundle exec rake db:setup
+cd -
+
+# launch ui / runner
 exec supervisord -n
