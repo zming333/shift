@@ -30,3 +30,28 @@ Read the installation guide [here](https://github.com/square/shift/wiki/Installa
 
 Copyright (c) 2016 Square Inc. Distributed under the Apache 2.0 License.
 See LICENSE file for further details.
+
+---
+
+## Run locally with `docker-compose`
+
+If you haven't initialized database, do it first and do it only once:
+
+```
+# spin up db container
+docker-compose up -d db
+
+# wait for db container's own initialization to finish
+docker-compose logs -f
+
+# then run db:setup task
+docker-compose run --rm shift bundle exec rake db:setup
+```
+
+after `db:setup`, you can spin up the whole stack:
+
+```
+docker-compose up
+```
+
+and access ui at `http://<ip>:3000`
