@@ -48,8 +48,8 @@ COPY docker-entrypoint.sh /opt/code/
 # runtime
 WORKDIR /opt/code
 EXPOSE 3000
-ENTRYPOINT /opt/code/docker-entrypoint.sh
-CMD supervisord -n
+ENTRYPOINT ["/opt/code/docker-entrypoint.sh"]
+CMD ["supervisord", "-n"]
 
 # TODO:
 # patch ui/app/controllers/application_controller.rb to support cert-based account system

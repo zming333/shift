@@ -45,7 +45,7 @@ docker-compose up -d db
 docker-compose logs -f
 
 # then run db:setup task
-docker-compose run --rm shift bundle exec rake db:setup
+docker-compose run --rm shift bash -c 'cd /opt/code/ui; bundle exec rake db:setup'
 ```
 
 after `db:setup`, you can spin up the whole stack:
