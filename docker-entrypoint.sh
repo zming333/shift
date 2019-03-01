@@ -34,6 +34,7 @@ rest_key:
 # general config
 log_dir: /tmp/shift/
 pt_osc_path: pt-online-schema-change
+enable_trash: ${RUNNER_ENABLE_TRASH:-true}
 pending_drops_db: ${RUNNER_PENDING_DROPS_DB}
 log_sync_interval: ${RUNNER_LOG_SYNC_INTERVAL:-10}
 state_sync_interval: ${RUNNER_STATE_SYNC_INTERVAL:-10}
