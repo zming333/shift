@@ -11,7 +11,7 @@ RUN cd /go/src/github.com/square/shift/runner \
 FROM ruby:2.2
 
 # install deps
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     cpanminus \
     libdbd-mysql-perl \
