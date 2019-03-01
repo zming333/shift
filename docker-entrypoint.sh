@@ -46,6 +46,9 @@ port_override: ${RUNNER_PORT_OVERRIDE}
 database_override: ${RUNNER_DATABASE_OVERRIDE}
 " > /opt/code/runner/config/production-config.yaml
 
+# use DATABASE_URL only
+rm /opt/code/ui/config/database.yml
+
 # TODO:
 # patch ui/config/environments/production.rb at runtime in this script
 # for now, we modify it directly in place
