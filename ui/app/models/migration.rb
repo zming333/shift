@@ -192,7 +192,7 @@ class Migration < ActiveRecord::Base
     end
 
     updated = Migration.where(:id => self.id, :status => STATUS_GROUPS[:awaiting_approval], :lock_version => lock_version).
-      update_all(["runtype = ?, approved_by = ?, approved_at = NOW(), status = #{STATUS_GROUPS[:awaiting_start]}, " \
+      update_all(["runtype = ?, approved_by = ?, approved_at = UTC_TIMESTAMP(), status = #{STATUS_GROUPS[:awaiting_start]}, " \
       "lock_version = lock_version + 1", runtype, current_user_name])
     updated == 1
   end
@@ -214,7 +214,7 @@ class Migration < ActiveRecord::Base
 
       # once a migration has been started, it can never be edited
       updated = Migration.where(:id => self.id, :status => STATUS_GROUPS[:startable], :lock_version => lock_version).
-        update_all(["started_at = NOW(), editable = 0, status = #{STATUS_GROUPS[:copy_in_progress]}, " \
+        update_all(["started_at = UTC_TIMESTAMP(), editable = 0, status = #{STATUS_GROUPS[:copy_in_progress]}, " \
         "staged = 1, auto_run = ?, lock_version = lock_version + 1", auto_run])
       return updated == 1, false
     end
@@ -262,7 +262,7 @@ class Migration < ActiveRecord::Base
 
   def complete!
     updated = Migration.where(:id => self.id).
-      update_all("status = #{STATUS_GROUPS[:completed]}, completed_at = NOW(), lock_version = lock_version + 1")
+      update_all("status = #{STATUS_GROUPS[:completed]}, completed_at = UTC_TIMESTAMP(), lock_version = lock_version + 1")
     updated == 1
   end
 
