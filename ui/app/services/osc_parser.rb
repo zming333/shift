@@ -334,6 +334,14 @@ class OscParser
         raise ShiftError, 'nodegroup not supported'
       end,
 
+      r_opt_pos_column__FIRST: lambda do |tree, state|
+        raise ShiftError, 'FIRST not supported'
+      end,
+
+      r_opt_pos_column__AFTER: lambda do |tree, state|
+        raise ShiftError, 'AFTER not supported'
+      end,
+
       # ========================
       # ======== grammar =======
       # ========================
