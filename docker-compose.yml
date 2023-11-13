@@ -1,6 +1,16 @@
 version: '2'
 
 services:
+  # test:
+  #   image: mysql:5.7
+  #   volumes:
+  #     - /tmp/shift-target-db:/var/lib/mysql
+  #   environment:
+  #     - MYSQL_ROOT_PASSWORD=root
+  #     - MYSQL_USER=shift
+  #     - MYSQL_PASSWORD=shift
+  #   ports:
+  #     - "33060:3306"
   db:
     image: mysql:5.7
     volumes:
@@ -10,16 +20,17 @@ services:
       - MYSQL_DATABASE=shift
       - MYSQL_USER=shift
       - MYSQL_PASSWORD=shift
+    ports:
+      - "3306:3306"
   shift:
-    build:
-      context: .
+    image: xiachufang/shift:latest
     ports:
       - "3000:3000"
     environment:
       - DATABASE_URL=mysql2://shift:shift@db/shift?pool=30&timeout=5000
       - SECRET_KEY_BASE=some_random_30_char_string
       - DB_BLACKLIST=information_schema,mysql,performance_schema,_pending_drops,common_schema,sys
-      - UI_ADMINS=cadl
+      - UI_ADMINS=zming
       - UI_MYSQL_USER=shift
       - UI_MYSQL_PASSWORD=shift
       - RUNNER_MYSQL_USER=root
